@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KARABASS</title>
+    <title>KARABAS</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -86,23 +86,26 @@
             font-size: 24px;
             color: #1a2526;
             margin: 0;
+            font-weight: bold;
         }
         .ticket-header p {
-            font-size: 14px;
+            font-size: 12px;
             margin: 0;
+            color: #000;
+            text-align: right;
+            line-height: 1.4;
         }
         .ticket-image {
             width: 100%;
             height: 200px;
-            background-color: #ccc;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             background-size: cover;
             background-position: center;
         }
         .ticket-details {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         .ticket-details-left, .ticket-details-right {
             width: 48%;
@@ -110,6 +113,23 @@
         .ticket-details p {
             margin: 5px 0;
             font-size: 14px;
+            color: #000;
+        }
+        .ticket-details p strong {
+            font-weight: bold;
+            font-size: 14px;
+            color: #000;
+        }
+        .event-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a2526;
+            margin: 0 0 5px 0;
+        }
+        .event-date-time {
+            font-size: 16px;
+            color: #000;
+            margin: 0 0 10px 0;
         }
         .barcode {
             width: 100%;
@@ -121,33 +141,37 @@
                 #fff 2px,
                 #fff 4px
             );
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         .ticket-footer {
             border: 1px solid #000;
             padding: 10px;
-            font-size: 12px;
+            font-size: 10px;
+            color: #000;
         }
         .ticket-footer h4 {
-            margin-top: 0;
+            margin: 0 0 5px 0;
+            font-size: 12px;
+            font-weight: bold;
         }
         .qr-code {
             position: absolute;
             top: 10px;
             right: 10px;
-            width: 60px; 
-            height: 60px;
+            width: 50px;
+            height: 50px;
         }
         .age-restriction {
             position: absolute;
-            top: 80px;
+            top: 65px;
             right: 10px;
-            font-size: 14px; 
+            font-size: 12px;
             font-weight: bold;
             color: #000;
             border: 1px solid #000;
-            padding: 3px;
+            padding: 2px;
             border-radius: 5px;
+            background-color: #fff;
         }
         .privacy-policy {
             background-color: #2c3e50;
@@ -167,7 +191,7 @@
             text-align: center;
         }
 
-   
+        /* Адаптация для мобильных устройств */
         @media (max-width: 600px) {
             h1 {
                 font-size: 24px;
@@ -190,7 +214,7 @@
                 font-size: 18px;
             }
             .ticket-header p {
-                font-size: 12px;
+                font-size: 10px;
             }
             .ticket-image {
                 height: 150px;
@@ -204,27 +228,39 @@
             .ticket-details p {
                 font-size: 12px;
             }
+            .ticket-details p strong {
+                font-size: 12px;
+            }
+            .event-name {
+                font-size: 18px;
+            }
+            .event-date-time {
+                font-size: 14px;
+            }
             .qr-code {
-                width: 30px; 
+                width: 30px;
                 height: 30px;
                 top: 5px;
                 right: 5px;
             }
             .age-restriction {
-                font-size: 10px; 
-                top: 50px; 
+                font-size: 8px;
+                top: 40px;
                 right: 5px;
-                padding: 2px;
+                padding: 1px;
             }
             .ticket-footer {
+                font-size: 8px;
+            }
+            .ticket-footer h4 {
                 font-size: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <h1>KARABASS</h1>
-    <h2>ГЕНЕРАЦИЯ БИЛЕТА</h2>
+    <h1>KARABAS</h1>
+    
 
     <div class="container" id="formContainer">
         <div class="form-group">
@@ -304,16 +340,17 @@
 
     <div class="ticket" id="ticketDisplay">
         <div class="ticket-header">
-            <h3>KARABASS</h3>
+            <h3>KARABAS</h3>
             <p>ЭЛЕКТРОННЫЙ БИЛЕТ<br>E-ticket #1745515021</p>
         </div>
         <div class="qr-code" id="qrCode"></div>
         <div class="age-restriction">18+</div>
+        <p class="event-name" id="eventNameDisplay"></p>
+        <p class="event-date-time" id="dateDisplay"></p>
+        <p class="event-date-time" id="timeDisplay"></p>
         <div class="ticket-image" id="eventImage"></div>
         <div class="ticket-details">
             <div class="ticket-details-left">
-                <p><strong id="eventNameDisplay"></strong></p>
-                <p><strong id="dateDisplay"></strong> <strong id="timeDisplay"></strong></p>
                 <p><strong>ГОРОД</strong><br><span id="cityDisplay"></span></p>
                 <p><strong>РЯД, МЕСТО</strong><br><span id="rowDisplay"></span> ряд <span id="seatDisplay"></span> место</p>
             </div>
@@ -361,7 +398,7 @@
                 { name: "Журавлиная песнь", image: "zhuravlinaya_pesn.png" }
             ],
             standup: [
-                { name: "Вечер смеха с Иваном Ивановым", image: "vecher_smekha_s_ivanom_ivanovym.png" },
+                { name: "Женский стендап", image: "zhenskiy_stendap.png" },
                 { name: "Стендап в Москве", image: "stendap_v_moskve.png" }
             ],
             exhibition: [
@@ -426,8 +463,8 @@
             document.getElementById('qrCode').innerHTML = '';
             new QRCode(document.getElementById('qrCode'), {
                 text: qrText,
-                width: 60, /* Уменьшен размер QR-кода */
-                height: 60,
+                width: 50,
+                height: 50,
                 colorDark: "#000000",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
