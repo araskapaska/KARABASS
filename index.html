@@ -133,20 +133,20 @@
         }
         .qr-code {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 80px;
-            height: 80px;
+            top: 10px;
+            right: 10px;
+            width: 60px; 
+            height: 60px;
         }
         .age-restriction {
             position: absolute;
-            top: 120px;
-            right: 20px;
-            font-size: 16px;
+            top: 80px;
+            right: 10px;
+            font-size: 14px; 
             font-weight: bold;
             color: #000;
             border: 1px solid #000;
-            padding: 5px;
+            padding: 3px;
             border-radius: 5px;
         }
         .privacy-policy {
@@ -167,7 +167,7 @@
             text-align: center;
         }
 
-        /* Адаптация для мобильных устройств */
+   
         @media (max-width: 600px) {
             h1 {
                 font-size: 24px;
@@ -205,16 +205,16 @@
                 font-size: 12px;
             }
             .qr-code {
-                width: 60px;
-                height: 60px;
-                top: 15px;
-                right: 15px;
+                width: 40px; 
+                height: 40px;
+                top: 5px;
+                right: 5px;
             }
             .age-restriction {
-                font-size: 12px;
-                top: 90px;
-                right: 15px;
-                padding: 3px;
+                font-size: 10px; 
+                top: 50px; 
+                right: 5px;
+                padding: 2px;
             }
             .ticket-footer {
                 font-size: 10px;
@@ -426,8 +426,8 @@
             document.getElementById('qrCode').innerHTML = '';
             new QRCode(document.getElementById('qrCode'), {
                 text: qrText,
-                width: 80,
-                height: 80,
+                width: 60, /* Уменьшен размер QR-кода */
+                height: 60,
                 colorDark: "#000000",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
