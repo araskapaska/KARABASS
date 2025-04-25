@@ -26,11 +26,6 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             color: #e74c3c;
         }
-        h2 {
-            font-size: 24px;
-            margin-top: 0;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
         .container, .ticket {
             background-color: rgba(44, 62, 80, 0.9);
             padding: 20px;
@@ -112,7 +107,7 @@
         .ticket-details {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 5px; /* Уменьшен отступ */
+            margin-bottom: 5px;
         }
         .ticket-details-left, .ticket-details-right {
             width: 48%;
@@ -136,7 +131,13 @@
         .event-date-time {
             font-size: 16px;
             color: #000;
-            margin: 0 0 10px 0;
+            margin: 0;
+            display: inline-block; /* Для выравнивания с QR-кодом */
+        }
+        .date-time-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
         }
         .barcode {
             width: 100%;
@@ -148,7 +149,7 @@
                 #fff 2px,
                 #fff 4px
             );
-            margin: 5px 0; /* Уменьшен отступ, чтобы штрих-код был выше */
+            margin: 5px 0;
         }
         .ticket-footer {
             border: 1px solid #000;
@@ -162,15 +163,14 @@
             font-weight: bold;
         }
         .qr-code {
-            position: absolute;
-            top: 10px;
-            right: 10px;
+            display: inline-block;
             width: 50px;
             height: 50px;
+            margin-left: 10px; /* Отступ от текста даты */
         }
         .age-restriction {
             position: absolute;
-            top: 65px;
+            top: 110px; /* Сдвинут ниже, чтобы быть под QR-кодом */
             right: 10px;
             font-size: 12px;
             font-weight: bold;
@@ -219,6 +219,12 @@
             padding: 10px;
             border-radius: 8px;
             margin-bottom: 10px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s;
+        }
+        .event-card:hover {
+            transform: scale(1.02);
         }
         .event-card img {
             width: 100px;
@@ -262,9 +268,6 @@
             h1 {
                 font-size: 24px;
             }
-            h2 {
-                font-size: 16px;
-            }
             .container, .privacy-policy, .other-events {
                 width: 100%;
                 padding: 15px;
@@ -306,12 +309,11 @@
             .qr-code {
                 width: 30px;
                 height: 30px;
-                top: 5px;
-                right: 5px;
+                margin-left: 5px;
             }
             .age-restriction {
                 font-size: 8px;
-                top: 40px;
+                top: 90px;
                 right: 5px;
                 padding: 1px;
             }
@@ -336,7 +338,6 @@
 </head>
 <body>
     <h1>KARABAS</h1>
-    <h2>ГЕНЕРАЦИЯ БИЛЕТА</h2>
 
     <div class="container" id="formContainer">
         <div class="form-group">
@@ -419,11 +420,15 @@
             <h3>KARABAS</h3>
             <p>ЭЛЕКТРОННЫЙ БИЛЕТ<br>E-ticket #1745515021</p>
         </div>
-        <div class="qr-code" id="qrCode"></div>
-        <div class="age-restriction">18+</div>
         <p class="event-name" id="eventNameDisplay"></p>
-        <p class="event-date-time" id="dateDisplay"></p>
-        <p class="event-date-time" id="timeDisplay"></p>
+        <div class="date-time-container">
+            <div>
+                <p class="event-date-time" id="dateDisplay"></p>
+                <p class="event-date-time" id="timeDisplay"></p>
+            </div>
+            <div class="qr-code" id="qrCode"></div>
+        </div>
+        <div class="age-restriction">18+</div>
         <div class="ticket-image" id="eventImage"></div>
         <div class="ticket-details">
             <div class="ticket-details-left">
@@ -455,27 +460,27 @@
 
     <div class="other-events" id="otherEvents">
         <h3>Другие мероприятия</h3>
-        <div class="event-card">
+        <a href="event-lebedinoe.html" class="event-card">
             <img src="lebedinoe_ozero.png" alt="Лебединое озеро">
             <div>
                 <h4>Лебединое озеро</h4>
                 <p>30 Апреля 2025, 19:00</p>
             </div>
-        </div>
-        <div class="event-card">
+        </a>
+        <a href="event-traviata.html" class="event-card">
             <img src="traviata.png" alt="Травиата">
             <div>
                 <h4>Травиата</h4>
                 <p>5 Мая 2025, 18:30</p>
             </div>
-        </div>
-        <div class="event-card">
+        </a>
+        <a href="event-zhenskiy.html" class="event-card">
             <img src="zhenskiy_stendap.png" alt="Женский стендап">
             <div>
                 <h4>Женский стендап</h4>
                 <p>10 Мая 2025, 20:00</p>
             </div>
-        </div>
+        </a>
     </div>
 
     <footer>
