@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KARABAS</title>
+    <title>KARABASS</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -132,7 +132,7 @@
             font-size: 16px;
             color: #000;
             margin: 0;
-            display: inline-block; /* Для выравнивания с QR-кодом */
+            display: inline-block;
         }
         .date-time-container {
             display: flex;
@@ -166,11 +166,11 @@
             display: inline-block;
             width: 50px;
             height: 50px;
-            margin-left: 10px; /* Отступ от текста даты */
+            margin-left: 10px;
         }
         .age-restriction {
             position: absolute;
-            top: 110px; /* Сдвинут ниже, чтобы быть под QR-кодом */
+            top: 110px;
             right: 10px;
             font-size: 12px;
             font-weight: bold;
@@ -197,6 +197,17 @@
             display: none;
             width: 500px;
             text-align: center;
+        }
+        .action-buttons {
+            display: none;
+            width: 500px;
+            text-align: center;
+        }
+        .action-buttons button:nth-child(1) {
+            background-color: #34495e;
+        }
+        .action-buttons button:nth-child(1):hover {
+            background-color: #2c3e50;
         }
         .other-events {
             display: none;
@@ -276,7 +287,7 @@
                 width: 100%;
                 padding: 15px;
             }
-            .download-buttons {
+            .download-buttons, .action-buttons {
                 width: 100%;
             }
             .ticket-header h3 {
@@ -337,7 +348,7 @@
     </style>
 </head>
 <body>
-    <h1>KARABAS</h1>
+    <h1>KARABASS</h1>
 
     <div class="container" id="formContainer">
         <div class="form-group">
@@ -417,7 +428,7 @@
 
     <div class="ticket" id="ticketDisplay">
         <div class="ticket-header">
-            <h3>KARABAS</h3>
+            <h3>KARABASS</h3>
             <p>ЭЛЕКТРОННЫЙ БИЛЕТ<br>E-ticket #1745515021</p>
         </div>
         <p class="event-name" id="eventNameDisplay"></p>
@@ -458,6 +469,11 @@
         <button onclick="downloadPDF()">Скачать как PDF</button>
     </div>
 
+    <div class="action-buttons" id="actionButtons">
+        <button onclick="goBack()">Назад</button>
+        <button onclick="goToEventSite()">Перейти на сайт мероприятия</button>
+    </div>
+
     <div class="other-events" id="otherEvents">
         <h3>Другие мероприятия</h3>
         <a href="event-lebedinoe.html" class="event-card">
@@ -493,7 +509,7 @@
                 { name: "Игрок", image: "igrok.png" },
                 { name: "Золотой петушок", image: "zolotoy_petushok.png" },
                 { name: "Сорочинская ярмарка", image: "sorochinskaya_yarmarka.png" },
-                { name: "Травиата", image: "traviata.png" }
+                { name: "Травиата", image: "traviata.png", site: "https://www.mariinsky.ru" }
             ],
             theater: [
                 { name: "Самоубийца", image: "samoubiitsa.png" },
@@ -503,12 +519,12 @@
             ballet: [
                 { name: "Жар-птица", image: "zharptitsa.png" },
                 { name: "Шехеразада", image: "sheherazada.png" },
-                { name: "Лебединое озеро", image: "lebedinoe_ozero.png" },
+                { name: "Лебединое озеро", image: "lebedinoe_ozero.png", site: "https://www.bolshoi.ru" },
                 { name: "Анюта", image: "anyuta.png" },
                 { name: "Журавлиная песнь", image: "zhuravlinaya_pesn.png" }
             ],
             standup: [
-                { name: "Женский стендап", image: "zhenskiy_stendap.png" },
+                { name: "Женский стендап", image: "zhenskiy_stendap.png", site: "https://standupmoscow.ru" },
                 { name: "Стендап в Москве", image: "stendap_v_moskve.png" }
             ],
             exhibition: [
@@ -517,6 +533,8 @@
                 { name: "Картинки с выставки", image: "kartinki_s_vystavki.png" }
             ]
         };
+
+        let selectedEvent = null;
 
         function updateEventList() {
             const eventType = document.getElementById('eventType').value;
@@ -554,6 +572,7 @@
             const ticketDisplay = document.getElementById('ticketDisplay');
             ticketDisplay.style.display = 'block';
             document.getElementById('downloadButtons').style.display = 'block';
+            document.getElementById('actionButtons').style.display = 'block';
             document.getElementById('otherEvents').style.display = 'block';
 
             document.getElementById('eventNameDisplay').textContent = eventName;
@@ -565,7 +584,7 @@
             document.getElementById('seatDisplay').textContent = seat;
             document.getElementById('priceDisplay').textContent = price;
 
-            const selectedEvent = events[eventType].find(event => event.name === eventName);
+            selectedEvent = events[eventType].find(event => event.name === eventName);
             if (selectedEvent) {
                 document.getElementById('eventImage').style.backgroundImage = `url(${selectedEvent.image})`;
             }
@@ -580,6 +599,23 @@
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
             });
+        }
+
+        function goBack() {
+            document.getElementById('formContainer').style.display = 'block';
+            document.querySelector('.privacy-policy').style.display = 'block';
+            document.getElementById('ticketDisplay').style.display = 'none';
+            document.getElementById('downloadButtons').style.display = 'none';
+            document.getElementById('actionButtons').style.display = 'none';
+            document.getElementById('otherEvents').style.display = 'none';
+        }
+
+        function goToEventSite() {
+            if (selectedEvent && selectedEvent.site) {
+                window.open(selectedEvent.site, '_blank');
+            } else {
+                alert('Сайт для этого мероприятия недоступен.');
+            }
         }
 
         function downloadPNG() {
