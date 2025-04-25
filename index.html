@@ -126,18 +126,22 @@
             font-size: 24px;
             font-weight: bold;
             color: #1a2526;
-            margin: 0 0 5px 0;
+            margin: 0 0 10px 0;
+            text-align: center; /* Центрируем название */
         }
         .event-date-time {
             font-size: 16px;
             color: #000;
-            margin: 0;
-            display: inline-block;
+            margin: 0 0 10px 0;
         }
-        .date-time-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
+        .qr-code-container {
+            text-align: center;
+            margin: 10px 0; /* Отступы сверху и снизу */
+        }
+        .qr-code {
+            display: inline-block;
+            width: 80px; /* Увеличиваем размер QR-кода */
+            height: 80px;
         }
         .barcode {
             width: 100%;
@@ -162,15 +166,9 @@
             font-size: 12px;
             font-weight: bold;
         }
-        .qr-code {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            margin-left: 10px;
-        }
         .age-restriction {
             position: absolute;
-            top: 110px;
+            top: 10px;
             right: 10px;
             font-size: 12px;
             font-weight: bold;
@@ -318,13 +316,12 @@
                 font-size: 14px;
             }
             .qr-code {
-                width: 30px;
-                height: 30px;
-                margin-left: 5px;
+                width: 60px;
+                height: 60px;
             }
             .age-restriction {
                 font-size: 8px;
-                top: 90px;
+                top: 5px;
                 right: 5px;
                 padding: 1px;
             }
@@ -431,15 +428,13 @@
             <h3>KARABAS</h3>
             <p>ЭЛЕКТРОННЫЙ БИЛЕТ<br>E-ticket #1745515021</p>
         </div>
+        <div class="age-restriction">18+</div>
         <p class="event-name" id="eventNameDisplay"></p>
-        <div class="date-time-container">
-            <div>
-                <p class="event-date-time" id="dateDisplay"></p>
-                <p class="event-date-time" id="timeDisplay"></p>
-            </div>
+        <div class="qr-code-container">
             <div class="qr-code" id="qrCode"></div>
         </div>
-        <div class="age-restriction">18+</div>
+        <p class="event-date-time" id="dateDisplay"></p>
+        <p class="event-date-time" id="timeDisplay"></p>
         <div class="ticket-image" id="eventImage"></div>
         <div class="ticket-details">
             <div class="ticket-details-left">
@@ -593,8 +588,8 @@
             document.getElementById('qrCode').innerHTML = '';
             new QRCode(document.getElementById('qrCode'), {
                 text: qrText,
-                width: 50,
-                height: 50,
+                width: 80, /* Увеличиваем размер QR-кода */
+                height: 80,
                 colorDark: "#000000",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
