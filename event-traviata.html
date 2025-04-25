@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Травиата</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a2526;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #2c3e50;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        h1 {
+            font-size: 28px;
+            color: #e74c3c;
+        }
+        p {
+            font-size: 14px;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        button, a.button {
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            border: none;
+            color: #ffffff;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            text-align: center;
+            display: inline-block;
+        }
+        button:hover, a.button:hover {
+            background-color: #c0392b;
+        }
+        button.back {
+            background-color: #34495e;
+        }
+        button.back:hover {
+            background-color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Травиата</h1>
+        <img src="traviata.png" alt="Травиата">
+        <p><strong>Дата и время:</strong> 5 Мая 2025, 18:30</p>
+        <p><strong>Место:</strong> Мариинский театр, Санкт-Петербург</p>
+        <p>"Травиата" — это опера в трёх актах, написанная Джузеппе Верди на либретто Франческо Мария Пьяве. Она основана на романе Александра Дюма-сына "Дама с камелиями". История рассказывает о трагической любви куртизанки Виолетты Валери и молодого дворянина Альфреда Жермона. Опера полна эмоциональных арий и драматических моментов, которые не оставят равнодушными даже самых искушённых зрителей.</p>
+        <p>Присоединяйтесь к нам в Мариинском театре, чтобы насладиться этой великолепной постановкой!</p>
+        <div class="buttons">
+            <button class="back" onclick="window.location.href='index.html'">Назад</button>
+            <a href="https://www.mariinsky.ru" target="_blank" class="button">Перейти на сайт мероприятия</a>
+        </div>
+    </div>
+</body>
+</html>
